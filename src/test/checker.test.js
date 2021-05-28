@@ -39,3 +39,23 @@ test('can find 3 vertical match', () => {
 
     expect(checker(gameTable)).toBe(null);
 });
+
+test('can find 3 diag right match', () => {
+  const gameTable = [
+      ['X', ' ', ' '],
+      ['X', 'X', 'O'],
+      [' ', ' ', 'X'],
+    ];
+
+  expect(checker(gameTable)).toBe('X');
+});
+
+test('can find 3 diag left match', () => {
+  const gameTable = [
+      [' ', ' ', 'X'],
+      [' ', 'X', 'O'],
+      ['X', ' ', 'O'],
+    ];
+
+  expect(checker(gameTable)).toBe('X');
+});
