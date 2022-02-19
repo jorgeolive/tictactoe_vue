@@ -1,7 +1,7 @@
 import checker from '../logic/checker';
 
 class TreeNode {
-    constructor(table, parent, currentPlayer) {
+    constructor(table, parent, currentPlayer, levelOfDepth) {
         this.value = 0
         this.table = table
         this.parent = parent
@@ -14,17 +14,17 @@ class TreeNode {
         if (checkerVal != null) {
             this.isEndGame = true
             if (checkerVal === 'O') {
-                this.setValue(1)
+                this.setValue( 1 * levelOfDepth)
             }
             if (checkerVal === 'X') {
-                this.setValue(-1)
+                this.setValue( -1 * levelOfDepth)
             }
         } 
 
         const results = getChildMovements(table, currentPlayer)
 
         results.forEach(x => {
-            let newNode = new TreeNode(x, this, currentPlayer === 'X' ? 'O' : 'X')
+            let newNode = new TreeNode(x, this, currentPlayer === 'X' ? 'O' : 'X', levelOfDepth + 1)
             this.addChildNode(newNode)
         })
 
@@ -47,22 +47,25 @@ class TreeNode {
     }
 }
 
-export default function miniMax(table, currentPlayer) { //currentPlayer is either "X" or "O"
+export default function miniMax(table, currentPlayer) {
     if (!checker(table)) {
-        let treeNode = new TreeNode(table, null, currentPlayer)
+        let treeNode = new TreeNode(table, null, currentPlayer, 0)
 
-        if (treeNode.children.some(x => x.value === 1)) {
-            if (treeNode.children.some(x => x.value === 1 && x.isEndGame === true))
-                return treeNode.children.filter(x => x.value === 1 && x.isEndGame === true)[0].table
+        if (currentPlayer == 'O' && treeNode.children.some(x => x.value > 0)) {
+            if (treeNode.children.some(x => x.value > 0 && x.isEndGame == true))
+                return treeNode.children.filter(x => x.value > 0 && x.isEndGame == true)[0].table
 
-            return treeNode.children.filter(x => x.value === 1)[0].table
+            return treeNode.children.filter(x => x.value > 0)[0].table
         }
 
-        if (treeNode.value === -1 && treeNode.children.some(x => x.isEndGame !== true)) {
-            return treeNode.children.filter(x => x.isEndGame !== true)[0].table
+        if (currentPlayer == 'X' && treeNode.children.some(x => x.value < 0)) {
+            if (treeNode.children.some(x => x.value < 0 && x.isEndGame == true))
+                return treeNode.children.filter(x => x.value < 0 && x.isEndGame == true)[0].table
+
+            return treeNode.children.filter(x => x.value < 0)[0].table
         }
 
-        return treeNode.children[0].table
+        return treeNode.children.filter(x => x.value == 0)[0].table
     }
 }
 

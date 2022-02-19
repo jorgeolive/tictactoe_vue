@@ -63,3 +63,19 @@ test('machine blocks player from winning', () => {
       [' ', 'X', ' '],
     ]));
 });
+
+test('machine blocks player from winning, diagonal', () => {
+  const gameTable = [
+      ['X', 'O', ' '],
+      ['O', 'X', ' '],
+      [' ', ' ', ' '],
+    ];
+
+  const miniMaxResult = JSON.stringify(miniMax(gameTable, 'O'))
+
+  expect(miniMaxResult).toBe(JSON.stringify([
+      ['X', 'O', ' '],
+      ['O', 'X', ' '],
+      [' ', ' ', 'O'],
+    ]));
+});
