@@ -7,7 +7,7 @@ test('game wins on one move, vertical', () => {
         [' ', ' ', ' '],
       ];
 
-    const miniMaxResult = JSON.stringify(miniMax(gameTable, 'O'))
+    const miniMaxResult = JSON.stringify(miniMax(gameTable, 'O').table)
 
     expect(miniMaxResult).toBe(JSON.stringify([
         ['O', 'X', 'X'],
@@ -23,7 +23,7 @@ test('game wins on one move, horizontal', () => {
         [' ', ' ', ' '],
       ];
 
-    const miniMaxResult = JSON.stringify(miniMax(gameTable, 'O'))
+    const miniMaxResult = JSON.stringify(miniMax(gameTable, 'O').table)
 
     expect(miniMaxResult).toBe(JSON.stringify([
         ['O', 'O', 'O'],
@@ -39,7 +39,7 @@ test('machine blocks player from winning', () => {
       [' ', ' ', 'O'],
     ];
 
-  const miniMaxResult = JSON.stringify(miniMax(gameTable, 'O'))
+  const miniMaxResult = JSON.stringify(miniMax(gameTable, 'O').table)
 
   expect(miniMaxResult).toBe(JSON.stringify([
       [' ', 'O', ' '],
@@ -55,7 +55,7 @@ test('machine blocks player from winning', () => {
       [' ', 'X', ' '],
     ];
 
-  const miniMaxResult = JSON.stringify(miniMax(gameTable, 'O'))
+  const miniMaxResult = JSON.stringify(miniMax(gameTable, 'O').table)
 
   expect(miniMaxResult).toBe(JSON.stringify([
       ['O', 'O', ' '],
@@ -71,7 +71,7 @@ test('machine blocks player from winning, diagonal', () => {
       [' ', ' ', ' '],
     ];
 
-  const miniMaxResult = JSON.stringify(miniMax(gameTable, 'O'))
+  const miniMaxResult = JSON.stringify(miniMax(gameTable, 'O').table)
 
   expect(miniMaxResult).toBe(JSON.stringify([
       ['X', 'O', ' '],

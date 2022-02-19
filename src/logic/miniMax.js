@@ -20,7 +20,6 @@ class TreeNode {
                 this.setValue( -1 * levelOfDepth)
             }
         } 
-
         const results = getChildMovements(table, currentPlayer)
 
         results.forEach(x => {
@@ -53,19 +52,19 @@ export default function miniMax(table, currentPlayer) {
 
         if (currentPlayer == 'O' && treeNode.children.some(x => x.value > 0)) {
             if (treeNode.children.some(x => x.value > 0 && x.isEndGame == true))
-                return treeNode.children.filter(x => x.value > 0 && x.isEndGame == true)[0].table
+                return treeNode.children.filter(x => x.value > 0 && x.isEndGame == true)[0]
 
-            return treeNode.children.filter(x => x.value > 0)[0].table
+            return treeNode.children.filter(x => x.value > 0)[0]
         }
 
         if (currentPlayer == 'X' && treeNode.children.some(x => x.value < 0)) {
             if (treeNode.children.some(x => x.value < 0 && x.isEndGame == true))
-                return treeNode.children.filter(x => x.value < 0 && x.isEndGame == true)[0].table
+                return   treeNode.children.filter(x => x.value < 0 && x.isEndGame == true)[0]
 
-            return treeNode.children.filter(x => x.value < 0)[0].table
+            return treeNode.children.filter(x => x.value < 0)[0]
         }
 
-        return treeNode.children.filter(x => x.value == 0)[0].table
+        return treeNode.children.filter(x => x.value == 0)[0]
     }
 }
 

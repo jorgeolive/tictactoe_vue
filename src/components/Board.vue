@@ -29,8 +29,11 @@ export default {
       console.log(`click coming from ${xCoordenate} , ${yCoordenate}`)
 
       if(this.table[xCoordenate][yCoordenate] === ' ' && !this.isGameFinished) {
+
         this.table[xCoordenate][yCoordenate] = 'X'
-        this.table = miniMax(this.table, 'O')
+        const { table, isEndGame } = miniMax(this.table, 'O')
+        this.table = table
+        this.isGameFinished  = isEndGame     
       }
     }
   } ,
@@ -51,7 +54,7 @@ export default {
 <style scoped>
 .container {
   display: grid;
-  grid-template-columns: 100px 100px 100px;
-  grid-template-rows: 100px 100px 100px;
+  grid-template-columns: 10rem 10rem 10rem;
+  grid-template-rows: 10rem 10rem 10rem;
 }
 </style>
